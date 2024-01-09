@@ -2,6 +2,7 @@ import os
 from time import sleep
 from packaging import version
 from flask import Flask, request, jsonify
+from threading import Thread
 import openai
 from openai import OpenAI
 import functions
@@ -82,3 +83,16 @@ if __name__ == '__main__':
   # Get the PORT from environment variable with a default fallback
   port = int(os.environ.get('PORT', 8080))
   app.run(host='0.0.0.0', port=port)
+
+
+
+# Function for the background thread
+def keep_alive():
+    while True:
+        print("Keeping the application alive...")
+        sleep(60)  # Sleep for 60 seconds
+
+# Start the background thread
+keep_alive_thread = Thread(target=keep_alive)
+keep_alive_thread.start()
+
