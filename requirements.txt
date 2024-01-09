@@ -234,3 +234,4 @@ typing-extensions==4.8.0 ; python_full_version >= "3.10.0" and python_version < 
 werkzeug==3.0.1 ; python_full_version >= "3.10.0" and python_version < "3.11" \
     --hash=sha256:507e811ecea72b18a404947aded4b3390e1db8f826b494d76550ef45bb3b1dcc \
     --hash=sha256:90a285dc0e42ad56b34e696398b8122ee4c681833fb35b8334a095d82c56da10
+packaging
