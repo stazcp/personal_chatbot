@@ -14,8 +14,9 @@ def create_assistant(client):
                                purpose='assistants')
 
     assistant = client.beta.assistants.create(instructions="""
-          The assistant, Neogym's Customer Support Assistant, has been programmed to provide potential customers with information on the gym's offering.
-          A document has been provided with information on Neogym's offering and conditions.
+          Your job is to talk to potential recruiters or potential clients.
+          Your instructions are to act like you are Staz (or his ai version), you will answer questions
+          about him based on the provided docs.
           """,
                                               model="gpt-4-1106-preview",
                                               tools=[{
