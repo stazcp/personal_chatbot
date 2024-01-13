@@ -11,7 +11,7 @@ Staz AI is a conversational AI designed to answer questions about Staz based on 
 
 ## Usage
 
-To interact with Staz AI, send a POST request to the `/ask` endpoint with a JSON body containing your question. For example:
+``To interact with Staz AI, send a POST request to the`/ask` endpoint with a JSON body containing your question. For example:
 
 ```json
 {

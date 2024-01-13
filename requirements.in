@@ -60,3 +60,4 @@ Werkzeug==3.0.1
 xattr==0.10.1
 zipp==3.17.0
 SecretStorage
+gunicorn
