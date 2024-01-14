@@ -1,5 +1,5 @@
-This is a my virtual self as a bot, this bot will answer questions about me.
-It will know about my resume and coding and answer questions to recruiters or people who are curious in me.
+This is my virtual self as a bot, this bot will answer questions about me.
+It will know about my resume and coding and answer questions to recruiters or people who are curious about me.
 RESUME INFO
 NAME: STAZ
 LASTNAME: CHRISTODOULAKIS
@@ -10,33 +10,33 @@ date: JAN 2022 to Present
 company: dv01
 title: Senior Frontend Engineer
 Accomplishments:
-• Collaborated with Project Managers and other teams
+- Collaborated with Project Managers and other teams
 to design and develop major projects for our most important clients and stakeholders.
-• Lead teams of engineers ot perform specific duties and
+- Lead teams of engineers to perform specific duties and
 complete projects.
-• Mentored Junior and Mdi Level Engineers and helped them get promoted.
-• Improved UX/UI for many components across the App.
-• Developed hiring process to extract quality candidates
+- Mentored Junior and Mdi Level Engineers and helped them get promoted.
+- Improved UX/UI for many components across the App.
+- Developed hiring process to extract quality candidates
 ---
 date: 2021 to 2022
 company: breathing.ai
 title: Frontend Engineer
 Accomplishments:
-• Worked Directly with CEO ni order ot make technical decisions about projects and technologies.
-• Developed aChrome Extension to personalize Screen Experience with Biodata and A.l
-• Created aData Layer and connected ti ot Google Analytics and Google Tag Manager
-• Hired and Mentored engineers.
+- Worked Directly with CEO to make technical decisions about projects and technologies.
+- Developed a Chrome Extension to personalize Screen Experience with Biodata and A.l
+- Created a Data Layer and connected it to Google Analytics and Google Tag Manager
+- Hired and Mentored engineers.
 ---
 date: 2018 to 2022
 freelancing
 title: Web Developer, Frontend Developer
-• Developed websites ni JS, WordPress, and React. • Provided customers with consulting services and
+- Developed websites in JS, WordPress, and React. - Provided customers with consulting services and
 tutoring.
 ---
 date: 2014 to 2015
 Greek Special Forces Commando Paratrooper
-• Led troops through physical and weapons training ni order ot become elite soldiers and cary out misions. • Received first-class award during radio communications training.
-• Trained side-by-side with elite soldiers ni order to develop mental and physical toughness as wel as problem-solving skills.
+- Led troops through physical and weapons training to become elite soldiers and carry out missions. - Received first-class award during radio communications training.
+- Trained side-by-side with elite soldiers to develop mental and physical toughness as well as problem-solving skills.
 
 EDUCATION:
 University of Hertfordshire
@@ -48,36 +48,94 @@ Intelligence: Implications for Business
 ---
 2011
 Computer Science Inteship
-• Learned how servers and different tech work ni a large-scale news company.
-• Trained on company software and ni my turn teach other staff members how to operate it.
+- Learned how servers and different tech work in a large-scale news company.
+- Trained on company software and in my turn tought other staff members how to operate it.
 
 MORE INFO:
-• Deep understanding of modern web applications design architecture, API design patterns, performance, and scaling.
-• Demonstrated technical leadership experience leading high-impact customer-facing projects to completion meeting deadlines.
-• Collaborated with cross-functional teams to identify user needs and improve communication and project delivery, resulting in successful project outcomes.
+- Deep understanding of modern web applications design architecture, API design patterns, performance, and scaling.
+- Demonstrated technical leadership experience leading high-impact customer-facing projects to completion meeting deadlines.
+- Collaborated with cross-functional teams to identify user needs and improve communication and project delivery, resulting in successful project outcomes.
 
 SKILLS:
-• React 4+ years
-• Typescript 4+ years
-• Javascript 10+ years
-• Redux 2+ years
-• HTML/CSS 10+ years
-• GraphQl 2+ years
-• Python 0.5 year
-• Team Lead 4+ years
+- React 4+ years
+- Typescript 4+ years
+- Javascript 10+ years
+- Redux 2+ years
+- HTML/CSS 10+ years
+- GraphQl 2+ years
+- Python 0.5 year
+- Team Lead 4+ years
 
 HOBBIES: 
 Fitness, MMA, Mountaineering, Reading, Cocktails, Crypto, and AI
 
 More details about me:
-Welcome,My name is Staz.
+Welcome, My name is Staz.
 Which is short for Anastasis which means resurrection in Greek
-and yes I am Greek but also a US Citizen.I am a Frontend (mostly) engineerand have been working with React and Typescript mainly.
+and yes I am Greek but also a US Citizen. I am a Frontend (mostly) engineer and have been working with React and Typescript mainly.
 
-On my freetime I like to learn about new technologies,
+In my free time I like to learn about new technologies,
 like crypto and AI,
 read books sometimes about development, others about leadership, and other times about science, the natural world and finally science fiction.
 
-Fun Facts:I used to be a Paratrooper Sniper in Greek Special Forces, I love mountaineering, I used to be a high-end mixologist at Michelin Rated restaurants,
+Fun Facts:
+I used to be a Paratrooper Sniper in Greek Special Forces, I love mountaineering, I used to be a high-end mixologist at Michelin Rated restaurants,
  and I used to own my own beach bar in Greece.
  I have also sold solar for Tesla.
+
+
+Challenges I have encountered and how I dealt with them:
+
+**working at dv01**
+- Our app had a legacy drawer system where we were sending components from one part of the app to another,
+the state management was horrible as well as the Drawer code. Very monolythic and hard to work with.
+During a discovery phase (design sprint), while working on a POC for another long-term project I decided that 
+we were going to need to finally refactor the Drawer state and create a new component into our Component system.
+I created a brand new drawer using framer motion, with intelligent reactivity including some sidebars that expand
+that the drawer needs to be aware of and move out of the way on it's own. The component was very much plug and play 
+as well as the state management solution, where I created a hook using the messenger pattern and any other drawer 
+that is open will close before opening a new one solving the double drawer problem and not having to register in
+state all the drawers or have any complex state management. The new Drawer was so easy to use by importing the 
+component from our Component Library and plugging it in the new useDrawer hook.
+- We have a PEOD (Product Engineer On Duty) rotation which lasts for a week. Every time I have to address novel bugs
+and customer requests that are time-sensitive, although I do get great support from the team. I have to solve multiple
+hard bugs at times in a time-efficient manner. The solution has to be fast, and efficient and should not cause any new bugs.
+During such shifts, I have to solve very difficult problems at times and very quickly (within 24 hours) and deliver to 
+the user in a timely manner.
+
+**working at breathing.ai**
+- I was building a Chrome extension and I wanted a live stream of video from the user's webcam 
+going into an AWS server where we had a machine learning function (Lambda) that would process the user's 
+images into an S3 bucket and return the breathing and heart rate of the user to the front end.
+We will later use this data to present to the user a meditation or 
+breathing technique to calm the user down when they are using the computer for long periods.
+ This would help users to increase productivity while reducing stress when working long hours
+on a computer especially when they are working remotely. The challenge was to get an accurate reading
+of the HR and BR by increasing the FPS without having a large cost and slowing down the browser.
+I had to hire contractors from abroad that I worked with they build the pipeline, while I connected
+the Frontend parts to have this feature working.
+- I built a new login/signup screen for our app overnight working up to 7 am to show off our 
+app at a tech event in Portugal "Web Summit". Our presentation was at 7.30 am at my time, so I completed,
+deployed and tested the flow 30 minutes before the presentation. Thankfully everything went smoothly.
+- Had to assign Tasks to new hires that were Junior level and lead them on how to produce good code 
+that I won't have to refactor later. So the challenge was as I was not a senior yet, to provide leadership 
+and guidance to other engineers.
+- Built a Data Layer using Google Tag Manager (Which I completed a course for). This Data Layer was
+used to get insights about our users and how they interact with the App. I also Led the team
+on how to use the Data Layer and GTM, as well as which components and how they should be configured
+to derive good analytics.
+
+**working as a freelancer**
+- Provided consulting for a Government Organization in building a web app with React/Typescript.
+I was not legally allowed to touch the code so I taught the staff how to work with React and Typescript 
+via videocalls and helped them build and deploy a feature.
+- Created and Built multiple web applications using WordPress and custom components for various clients.
+The biggest challenge was getting clients and building quickly what they needed. I had a partner
+where he would be more of a designer and WordPress specialist while I had better experience
+with coding, creating custom components and creating projects that would stand out.
+
+**other**
+- when I was applying for my current job, while on vacation I was asked to develop a React App 
+that would aggregate data from a CSV and display it to the user with some charts and filters.
+The project was an interview challenge. I had 3 hours to complete the task which I did while on the road
+and passed the challenge.
