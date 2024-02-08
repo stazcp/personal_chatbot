@@ -1,4 +1,5 @@
 import os
+import json
 from time import sleep
 from packaging import version
 from flask import Flask, request, jsonify
@@ -28,17 +29,37 @@ client = OpenAI(
     api_key=OPENAI_API_KEY
 )  # should use env variable OPENAI_API_KEY in secrets (bottom left corner)
 
-# Create new assistant or load existing
-assistant_id = functions.create_assistant(client)
+# Load assistant_id and thread_id from a file
+def load_ids():
+    if os.path.exists('ids.json'):
+        with open('ids.json', 'r') as f:
+            ids = json.load(f)
+            return ids.get('assistant_id'), ids.get('thread_id')
+    else:
+        return None, None
+
+# Save assistant_id and thread_id to a file
+def save_ids(assistant_id, thread_id):
+    with open('ids.json', 'w') as f:
+        json.dump({'assistant_id': assistant_id, 'thread_id': thread_id}, f)
+
+# Load existing IDs
+assistant_id, thread_id = load_ids()
+
+# If no existing IDs, create new assistant and thread
+if assistant_id is None or thread_id is None:
+    assistant_id = functions.create_assistant(client)
+    thread = client.beta.threads.create()
+    thread_id = thread.id
+    save_ids(assistant_id, thread_id)
 
 
 # Start conversation thread
 @app.route('/start', methods=['GET'])
 def start_conversation():
   print("Starting a new conversation...")  # Debugging line
-  thread = client.beta.threads.create()
-  print(f"New thread created with ID: {thread.id}")  # Debugging line
-  return jsonify({"thread_id": thread.id})
+  print(f"New thread created with ID: {thread_id}")  # Debugging line
+  return jsonify({"thread_id": thread_id})
 
 
 # Generate response
