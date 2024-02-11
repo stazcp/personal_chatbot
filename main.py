@@ -114,7 +114,7 @@ if __name__ == '__main__':
 def keep_alive():
     while True:
         print("Keeping the application alive...")
-        sleep(60)  # Sleep for 60 seconds
+        sleep(45) 
 
 # Start the background thread
 keep_alive_thread = Thread(target=keep_alive)
