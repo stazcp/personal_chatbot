@@ -112,11 +112,9 @@ if __name__ == '__main__':
 
 
 
-# Function for the background thread
+@app.route('/keepalive', methods=['GET'])
 def keep_alive():
-    while True:
-        print("Keeping the application alive...")
-        sleep(45) 
+    return "Server is awake", 200
 
 # Start the background thread
 keep_alive_thread = Thread(target=keep_alive)
