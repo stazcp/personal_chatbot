@@ -104,7 +104,7 @@ def chat():
     print(f"Assistant response: {response}")  # Debugging line
     return jsonify({"response": response})
   
-  except openai.Error as e:
+  except Exception as e:
       print(f"OpenAI error: {e}")  # Debugging line
       return jsonify({"error": str(e)}), 500
 
