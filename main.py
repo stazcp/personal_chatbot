@@ -8,7 +8,6 @@ import openai
 from openai import OpenAI
 import functions
 from flask_cors import CORS
-from openai.api_resources.abstract.api_resource import APIResourceError
 
 
 # Check OpenAI version is correct
@@ -105,7 +104,7 @@ def chat():
     print(f"Assistant response: {response}")  # Debugging line
     return jsonify({"response": response})
   
-  except APIResourceError as e:
+  except openai.Error as e:
       print(f"OpenAI error: {e}")  # Debugging line
       return jsonify({"error": str(e)}), 500
 
