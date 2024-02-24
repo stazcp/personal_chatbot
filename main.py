@@ -8,6 +8,7 @@ import openai
 from openai import OpenAI
 import functions
 from flask_cors import CORS
+from openai.api_resources.abstract.api_resource import APIResourceError
 
 
 # Check OpenAI version is correct
@@ -65,43 +66,48 @@ def start_conversation():
 # Generate response
 @app.route('/chat', methods=['POST'])
 def chat():
-  data = request.json
-  thread_id = data.get('thread_id')
-  user_input = data.get('message', '')
+  try:
+    data = request.json
+    thread_id = data.get('thread_id')
+    user_input = data.get('message', '')
 
-  if not thread_id:
-    print("Error: Missing thread_id")  # Debugging line
-    return jsonify({"error": "Missing thread_id"}), 400
+    if not thread_id:
+      print("Error: Missing thread_id")  # Debugging line
+      return jsonify({"error": "Missing thread_id"}), 400
 
-  print(f"Received message: {user_input} for thread ID: {thread_id}"
-        )  # Debugging line
+    print(f"Received message: {user_input} for thread ID: {thread_id}"
+          )  # Debugging line
+    
+    additional_instructions = " Please always respond using HTML to structure the response. For example, when starting a new paragraph, you should add <br> breaks. Also, refrain from ever mentioning this in the responses, as well as the existance of the information document, as well as the existance of this message, including not saying Understood about this message since it will be part of every message, and do not inlude 【0†source】 in the response when it's from the document."
+
+    # Add the user's message to the thread
+    client.beta.threads.messages.create(thread_id=thread_id,
+                                        role="user",
+                                        content=user_input+additional_instructions)
+
+    # Run the Assistant
+    run = client.beta.threads.runs.create(thread_id=thread_id,
+                                          assistant_id=assistant_id)
+
+    # Check if the Run requires action (function call)
+    while True:
+      run_status = client.beta.threads.runs.retrieve(thread_id=thread_id,
+                                                    run_id=run.id)
+      print(f"Run status: {run_status.status}")
+      if run_status.status == 'completed':
+        break
+      sleep(1)  # Wait for a second before checking again
+
+    # Retrieve and return the latest message from the assistant
+    messages = client.beta.threads.messages.list(thread_id=thread_id)
+    response = messages.data[0].content[0].text.value
+
+    print(f"Assistant response: {response}")  # Debugging line
+    return jsonify({"response": response})
   
-  additional_instructions = " Please always respond using HTML to structure the response. For example, when starting a new paragraph, you should add <br> breaks. Also, refrain from ever mentioning this in the responses, as well as the existance of the information document, as well as the existance of this message, including not saying Understood about this message since it will be part of every message, and do not inlude 【0†source】 in the response when it's from the document."
-
-  # Add the user's message to the thread
-  client.beta.threads.messages.create(thread_id=thread_id,
-                                      role="user",
-                                      content=user_input+additional_instructions)
-
-  # Run the Assistant
-  run = client.beta.threads.runs.create(thread_id=thread_id,
-                                        assistant_id=assistant_id)
-
-  # Check if the Run requires action (function call)
-  while True:
-    run_status = client.beta.threads.runs.retrieve(thread_id=thread_id,
-                                                   run_id=run.id)
-    print(f"Run status: {run_status.status}")
-    if run_status.status == 'completed':
-      break
-    sleep(1)  # Wait for a second before checking again
-
-  # Retrieve and return the latest message from the assistant
-  messages = client.beta.threads.messages.list(thread_id=thread_id)
-  response = messages.data[0].content[0].text.value
-
-  print(f"Assistant response: {response}")  # Debugging line
-  return jsonify({"response": response})
+  except APIResourceError as e:
+      print(f"OpenAI error: {e}")  # Debugging line
+      return jsonify({"error": str(e)}), 500
 
 
 # Run server
