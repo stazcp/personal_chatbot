@@ -99,6 +99,7 @@ def chat():
 
     # Retrieve and return the latest message from the assistant
     messages = client.beta.threads.messages.list(thread_id=thread_id)
+    print(f"messages: {messages}")  # Debugging line
     response = messages.data[0].content[0].text.value
 
     print(f"Assistant response: {response}")  # Debugging line
