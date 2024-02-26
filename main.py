@@ -1,5 +1,6 @@
-import os
+import logging
 import json
+import os
 from time import sleep
 from packaging import version
 from flask import Flask, request, jsonify
@@ -8,6 +9,8 @@ import openai
 from openai import OpenAI
 import functions
 from flask_cors import CORS
+from error import CustomAPIError 
+from functions import create_assistant_and_thread_and_save_ids, load_ids
 
 
 # Check OpenAI version is correct
@@ -27,32 +30,14 @@ CORS(app, origins='http://localhost:5173')
 # Init client
 client = OpenAI(
     api_key=OPENAI_API_KEY
-)  # should use env variable OPENAI_API_KEY in secrets (bottom left corner)
-
-# Load assistant_id and thread_id from a file
-def load_ids():
-    if os.path.exists('ids.json'):
-        with open('ids.json', 'r') as f:
-            ids = json.load(f)
-            return ids.get('assistant_id'), ids.get('thread_id')
-    else:
-        return None, None
-
-# Save assistant_id and thread_id to a file
-def save_ids(assistant_id, thread_id):
-    with open('ids.json', 'w') as f:
-        json.dump({'assistant_id': assistant_id, 'thread_id': thread_id}, f)
+)
 
 # Load existing IDs
 assistant_id, thread_id = load_ids()
 
 # If no existing IDs, create new assistant and thread
 if assistant_id is None or thread_id is None:
-    assistant_id = functions.create_assistant(client)
-    thread = client.beta.threads.create()
-    thread_id = thread.id
-    save_ids(assistant_id, thread_id)
-
+    assistant_id, thread_id = create_assistant_and_thread_and_save_ids(client)
 
 # Start conversation thread
 @app.route('/start', methods=['GET'])
@@ -61,18 +46,25 @@ def start_conversation():
   print(f"New thread created with ID: {thread_id}")  # Debugging line
   return jsonify({"thread_id": thread_id})
 
-
 # Generate response
 @app.route('/chat', methods=['POST'])
 def chat():
+  global assistant_id, thread_id
   try:
     data = request.json
     thread_id = data.get('thread_id')
     user_input = data.get('message', '')
 
     if not thread_id:
-      print("Error: Missing thread_id")  # Debugging line
-      return jsonify({"error": "Missing thread_id"}), 400
+      error_response = {
+          "error": {
+              "message": "Missing thread_id",
+              "type": "BadRequestError",
+              "code": 400
+          }
+      }
+      return jsonify(error_response), 400
+
 
     print(f"Received message: {user_input} for thread ID: {thread_id}"
           )  # Debugging line
@@ -92,9 +84,24 @@ def chat():
     while True:
       run_status = client.beta.threads.runs.retrieve(thread_id=thread_id,
                                                     run_id=run.id)
-      print(f"Run status: {run_status.status}")
+      print(f"Run status: {run_status}")
       if run_status.status == 'completed':
         break
+      if run_status.status == 'failed':
+          if run_status.last_error:
+              # Parse the JSON string in the error message into a dictionary
+              inner_error = json.loads(run_status.last_error.message)
+              print(f"Inner error: {inner_error}")  # Debugging line
+              error_response = {
+                  "error": {
+                      "message": inner_error,
+                      "code": run_status.last_error.code
+                  }
+              }
+          else:
+              error_response = {"error": {"message": "Unknown error", "code": None}}
+
+          return jsonify(error_response), 500
       sleep(1)  # Wait for a second before checking again
 
     # Retrieve and return the latest message from the assistant
@@ -105,24 +112,50 @@ def chat():
     print(f"Assistant response: {response}")  # Debugging line
     return jsonify({"response": response})
   
-  except Exception as e:
-      print(f"OpenAI error: {e}")  # Debugging line
-      return jsonify({"error": str(e)}), 500
+  except openai.NotFoundError as e:
+    assistant_id, thread_id = create_assistant_and_thread_and_save_ids(client)
+    logging.error(f"OpenAI error: {e.error}, creating new assistant and resending chat request.")
+    chat()
 
+  
+  except openai.OpenAIError as e:
+    logging.error(f"OpenAI error: {e.error}")
+    # Extract detailed error information
+    if hasattr(e, 'error') and 'message' in e.error:
+        detailed_message = e.error['message']
+    else:
+        detailed_message = "Unknown OpenAI error"
+    
+    # Create an instance of CustomAPIError with the detailed message and other details
+    error = CustomAPIError(detailed_message, type(e).__name__, 400)  # Adjust the status_code as needed
+    
+    # Use the to_dict method to create the error response
+    return jsonify(error.to_dict()), error.status_code
+
+  except Exception as e:
+      logging.error(f"Unknown error: {e}")
+      error = CustomAPIError(str(e), type(e).__name__, 500)
+      return jsonify(error.to_dict()), error.status_code
+  
+
+@app.route('/keepalive', methods=['GET'])
+def keep_alive():
+    return "Server is awake", 200
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    response = {
+        "error": {
+            "type": "InternalServerError",
+            "message": "The server encountered an internal error and was unable to complete your request."
+        }
+    }
+    return jsonify(response), 500
 
 # Run server
 if __name__ == '__main__':
   # Get the PORT from environment variable with a default fallback
   port = int(os.environ.get('PORT', 8080))
   app.run(host='0.0.0.0', port=port)
-
-
-
-@app.route('/keepalive', methods=['GET'])
-def keep_alive():
-    return "Server is awake", 200
-
-# Start the background thread
-keep_alive_thread = Thread(target=keep_alive)
-keep_alive_thread.start()
 

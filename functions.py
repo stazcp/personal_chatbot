@@ -1,26 +1,6 @@
 import json
 import os
 
-def create_assistant(client):
-  assistant_file_path = 'assistant.json'
-
-  if os.path.exists(assistant_file_path):
-    with open(assistant_file_path, 'r') as file:
-      assistant_data = json.load(file)
-      assistant_id = assistant_data['assistant_id']
-      print("Loaded existing assistant ID.")
-  else:
-    assistant_id = create_new_assistant(client)
-
-  # Try to use the assistant ID
-  try:
-    client.beta.assistants.retrieve(assistant_id)
-  except Exception:  # Replace with the specific exception if known
-    print("Invalid assistant ID. Creating a new assistant.")
-    assistant_id = create_new_assistant(client)
-
-  return assistant_id
-
 def create_new_assistant(client):
   file = client.files.create(file=open("knowledge.docx", "rb"),
                              purpose='assistants')
@@ -36,9 +16,33 @@ def create_new_assistant(client):
                                                 "type": "retrieval"
                                             }],
                                             file_ids=[file.id])
-
-  with open('assistant.json', 'w') as file:
-    json.dump({'assistant_id': assistant.id}, file)
-    print("Created a new assistant and saved the ID.")
-
+  print(f"Assistant created with ID: {assistant.id}")  # Debugging line
   return assistant.id
+
+def create_new_thread(client):
+  thread = client.beta.threads.create()
+  print(f"New thread created with ID: {thread.id}")  # Debugging line
+  return thread
+
+# Save assistant_id and thread_id to a file
+def save_ids(assistant_id, thread_id):
+    with open('ids.json', 'w') as f:
+        json.dump({'assistant_id': assistant_id, 'thread_id': thread_id}, f)
+
+def create_assistant_and_thread_and_save_ids(client):
+  assistant_id = create_new_assistant(client)
+  thread = create_new_thread(client)
+  thread_id = thread.id
+  save_ids(assistant_id, thread_id)
+
+  return assistant_id, thread_id
+
+
+# Load assistant_id and thread_id from a file
+def load_ids():
+    if os.path.exists('ids.json'):
+        with open('ids.json', 'r') as f:
+            ids = json.load(f)
+            return ids.get('assistant_id'), ids.get('thread_id')
+    else:
+        return None, None
