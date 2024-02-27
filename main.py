@@ -7,10 +7,9 @@ from flask import Flask, request, jsonify
 from threading import Thread
 import openai
 from openai import OpenAI
-import functions
 from flask_cors import CORS
 from error import CustomAPIError 
-from functions import create_assistant_and_thread_and_save_ids, load_ids
+from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids
 
 
 # Check OpenAI version is correct
@@ -42,8 +41,10 @@ if assistant_id is None or thread_id is None:
 # Start conversation thread
 @app.route('/start', methods=['GET'])
 def start_conversation():
-  print("Starting a new conversation...")  # Debugging line
-  print(f"New thread created with ID: {thread_id}")  # Debugging line
+  global thread_id
+  if not thread_id:
+    thread_id = create_new_thread(client)
+  print(f"Starting a new conversation with: {thread_id} ")  # Debugging line
   return jsonify({"thread_id": thread_id})
 
 # Generate response

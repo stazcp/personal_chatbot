@@ -5,12 +5,11 @@ def create_new_assistant(client):
   file = client.files.create(file=open("knowledge.docx", "rb"),
                              purpose='assistants')
 
-  assistant = client.beta.assistants.create(instructions="""
-        Your job is to talk to potential recruiters or potential clients.
-        Your instructions are to act like you are Staz (or his ai version), you will answer questions
-        about him based on the provided docs.
-        All your responses should be formatted into HTML.
-        """,
+
+  with open('instructions.txt', 'r') as file:
+    instructions = file.read()
+
+  assistant = client.beta.assistants.create(instructions=instructions,
                                             model="gpt-4-1106-preview",
                                             tools=[{
                                                 "type": "retrieval"
