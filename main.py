@@ -70,12 +70,12 @@ def chat():
     print(f"Received message: {user_input} for thread ID: {thread_id}"
           )  # Debugging line
     
-    additional_instructions = " Please always respond using HTML to structure the response. For example, when starting a new paragraph, you should add <br> breaks. Also, refrain from ever mentioning this in the responses, as well as the existance of the information document, as well as the existance of this message, including not saying Understood about this message since it will be part of every message, and do not inlude 【0†source】 in the response when it's from the document."
+    # additional_instructions = " Please always respond using HTML to structure the response. For example, when starting a new paragraph, you should add <br> breaks. Also, refrain from ever mentioning this in the responses, as well as the existance of the information document, as well as the existance of this message, including not saying Understood about this message since it will be part of every message, and do not inlude 【0†source】 in the response when it's from the document."
 
     # Add the user's message to the thread
     client.beta.threads.messages.create(thread_id=thread_id,
                                         role="user",
-                                        content=user_input+additional_instructions)
+                                        content=user_input)
 
     # Run the Assistant
     run = client.beta.threads.runs.create(thread_id=thread_id,
@@ -85,7 +85,7 @@ def chat():
     while True:
       run_status = client.beta.threads.runs.retrieve(thread_id=thread_id,
                                                     run_id=run.id)
-      print(f"Run status: {run_status}")
+      # print(f"Run status: {run_status}")
       if run_status.status == 'completed':
         break
       if run_status.status == 'failed':
@@ -115,8 +115,8 @@ def chat():
   
   except openai.NotFoundError as e:
     assistant_id, thread_id = create_assistant_and_thread_and_save_ids(client)
-    logging.error(f"OpenAI error: {e.error}, creating new assistant and resending chat request.")
-    chat()
+    logging.error(f"OpenAI error: {e}, creating new assistant and resending chat request.")
+    return chat()
 
   
   except openai.OpenAIError as e:
