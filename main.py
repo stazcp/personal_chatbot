@@ -27,6 +27,13 @@ else:
 app = Flask(__name__)
 CORS(app, resources={r"*": {"origins": CORS_ORIGINS}})
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'https://staz.ai')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
+
 # Init client
 client = OpenAI(
     api_key=OPENAI_API_KEY
