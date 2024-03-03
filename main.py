@@ -16,7 +16,7 @@ from functions import create_assistant_and_thread_and_save_ids, create_new_threa
 required_version = version.parse("1.1.1")
 current_version = version.parse(openai.__version__)
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
-CORS_ORIGINS = os.environ['CORS_ORIGINS']
+CORS_ORIGIN = os.environ['CORS_ORIGIN']
 if current_version < required_version:
   raise ValueError(f"Error: OpenAI version {openai.__version__}"
                    " is less than the required version 1.1.1")
@@ -25,14 +25,14 @@ else:
 
 # Start Flask app
 app = Flask(__name__)
-# CORS(app, resources={r"*": {"origins": CORS_ORIGINS}})
+# CORS(app, resources={r"*": {"origins": CORS_ORIGIN}})
 
 @app.after_request
 def after_request(response):
     # Get the origin from the incoming request
     request_origin = request.headers.get('Origin')
     # Set the Access-Control-Allow-Origin header to match the request origin exactly
-    if request_origin:
+    if request_origin == CORS_ORIGIN:
         response.headers.add('Access-Control-Allow-Origin', request_origin)
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
