@@ -29,11 +29,15 @@ app = Flask(__name__)
 
 @app.after_request
 def after_request(response):
-    # Add debugging logs
-    print(f"Adding CORS headers for origin {request.headers.get('Origin')}")
-    response.headers.add('Access-Control-Allow-Origin', CORS_ORIGINS)  # Example, adjust accordingly
+    # Get the origin from the incoming request
+    request_origin = request.headers.get('Origin')
+    # Set the Access-Control-Allow-Origin header to match the request origin exactly
+    if request_origin:
+        response.headers.add('Access-Control-Allow-Origin', request_origin)
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    # Ensure credentials are supported if your application needs them
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
 
 
