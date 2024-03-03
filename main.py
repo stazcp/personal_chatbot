@@ -25,7 +25,7 @@ else:
 
 # Start Flask app
 app = Flask(__name__)
-CORS(app, origins=CORS_ORIGINS)
+CORS(app, resources={r"*": {"origins": CORS_ORIGINS}})
 
 # Init client
 client = OpenAI(
