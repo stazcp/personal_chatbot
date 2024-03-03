@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 from threading import Thread
 import openai
 from openai import OpenAI
-from flask_cors import CORS
+# from flask_cors import CORS
 from error import CustomAPIError 
 from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids
 
@@ -25,14 +25,17 @@ else:
 
 # Start Flask app
 app = Flask(__name__)
-CORS(app, resources={r"*": {"origins": CORS_ORIGINS}})
+# CORS(app, resources={r"*": {"origins": CORS_ORIGINS}})
 
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', CORS_ORIGINS)
+    # Add debugging logs
+    print(f"Adding CORS headers for origin {request.headers.get('Origin')}")
+    response.headers.add('Access-Control-Allow-Origin', CORS_ORIGINS)  # Example, adjust accordingly
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
+
 
 # Init client
 client = OpenAI(
