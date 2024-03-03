@@ -31,7 +31,7 @@ app = Flask(__name__)
 def after_request(response):
     # Get the origin from the incoming request
     request_origin = request.headers.get('Origin')
-    logging.info(f"Request origin: {request_origin}")
+    print(f"Request origin: {request_origin}")
     # Set the Access-Control-Allow-Origin header to match the request origin exactly
     if request_origin == 'https://staz.ai/':
         response.headers.add('Access-Control-Allow-Origin', request_origin)
