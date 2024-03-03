@@ -9,10 +9,11 @@ def create_new_assistant(client):
     instructions = instructions_file.read()
   
   assistant = client.beta.assistants.create(instructions=instructions,
-                                            model="gpt-4-1106-preview",
-                                            tools=[{
-                                                "type": "retrieval"
-                                            }],
+                                            model="gpt-3.5-turbo",
+                                            tools=[
+                                              {"type": "code_interpreter"}, 
+                                              {"type": "retrieval"}  
+                                            ],
                                             file_ids=[knowledge_file.id])
   print(f"Assistant created with ID: {assistant.id}")  # Debugging line
   return assistant.id
