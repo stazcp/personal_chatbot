@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 from threading import Thread
 import openai
 from openai import OpenAI
-# from flask_cors import CORS
+from flask_cors import CORS
 from error import CustomAPIError 
 from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids
 
@@ -25,21 +25,21 @@ else:
 
 # Start Flask app
 app = Flask(__name__)
-# CORS(app, resources={r"*": {"origins":' https://staz.ai/'}})
+CORS(app, resources={r"/*": {"origins": CORS_ORIGIN}})
 
-@app.after_request
-def after_request(response):
-    # Get the origin from the incoming request
-    request_origin = request.headers.get('Origin')
-    print(f"Request origin: {request_origin}")
-    # Set the Access-Control-Allow-Origin header to match the request origin exactly
-    if request_origin == 'https://staz.ai':
-        response.headers.add('Access-Control-Allow-Origin', request_origin)
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-    # Ensure credentials are supported if your application needs them
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
+# @app.after_request
+# def after_request(response):
+#     # Get the origin from the incoming request
+#     request_origin = request.headers.get('Origin')
+#     print(f"Request origin: {request_origin}")
+#     # Set the Access-Control-Allow-Origin header to match the request origin exactly
+#     if request_origin == 'https://staz.ai':
+#         response.headers.add('Access-Control-Allow-Origin', request_origin)
+#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+#     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+#     # Ensure credentials are supported if your application needs them
+#     response.headers.add('Access-Control-Allow-Credentials', 'true')
+#     return response
 
 
 # Init client
