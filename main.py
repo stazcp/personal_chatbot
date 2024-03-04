@@ -33,7 +33,7 @@ def after_request(response):
     request_origin = request.headers.get('Origin')
     print(f"Request origin: {request_origin}")
     # Set the Access-Control-Allow-Origin header to match the request origin exactly
-    if request_origin == 'https://staz.ai/':
+    if request_origin == 'https://staz.ai':
         response.headers.add('Access-Control-Allow-Origin', request_origin)
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
