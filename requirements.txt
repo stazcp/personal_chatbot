@@ -204,6 +204,8 @@ pyproject-hooks==1.0.0
     #   -r requirements.in
     #   build
     #   poetry
+python-dotenv==1.0.1
+    # via -r requirements.in
 rapidfuzz==3.6.1
     # via
     #   -r requirements.in

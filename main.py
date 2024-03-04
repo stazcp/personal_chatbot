@@ -10,13 +10,15 @@ from openai import OpenAI
 from flask_cors import CORS
 from error import CustomAPIError 
 from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids
+from dotenv import load_dotenv
 
+load_dotenv()
 
 # Check OpenAI version is correct
 required_version = version.parse("1.1.1")
 current_version = version.parse(openai.__version__)
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
-CORS_ORIGIN = os.environ['CORS_ORIGIN']
+CORS_ORIGIN = os.environ.get('CORS_ORIGIN')
 if current_version < required_version:
   raise ValueError(f"Error: OpenAI version {openai.__version__}"
                    " is less than the required version 1.1.1")
