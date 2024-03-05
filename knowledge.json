@@ -1,0 +1,104 @@
+{
+    "personal_info": {
+        "name": "STAZ CHRISTODOULAKIS",
+        "title": "SENIOR FRONTEND SOFTWARE ENGINEER",
+        "openness_to_relocation_and_remote_work": "Staz has been working remotely most of his career in California and he enjoys remote work. He is also willing to work in an office for the right position and may be willing to relocate under the right circumstances, with relocation assistance being helpful."
+    },
+    "work_experience": [
+        {
+            "date": "JAN 2022 to Present",
+            "company": "dv01",
+            "title": "Senior Frontend Engineer",
+            "accomplishments": [
+                "Collaborated with Project Managers and other teams to design and develop major projects.",
+                "Lead teams of engineers.",
+                "Mentored Junior and Mid Level Engineers.",
+                "Improved UX/UI across the App.",
+                "Developed hiring process."
+            ]
+        },
+        {
+            "date": "2021 to 2022",
+            "company": "breathing.ai",
+            "title": "Frontend Engineer",
+            "accomplishments": [
+                "Worked directly with CEO on technical decisions.",
+                "Developed a Chrome Extension for Screen Experience.",
+                "Created Data Layer connected to Google Analytics and Tag Manager.",
+                "Hired and Mentored engineers."
+            ]
+        },
+        {
+            "date": "2018 to 2022",
+            "title": "Freelancing as Web Developer, Frontend Developer",
+            "accomplishments": [
+                "Developed websites and provided consulting.",
+                "Tutoring on web development."
+            ]
+        },
+        {
+            "date": "2014 to 2015",
+            "title": "Greek Special Forces Commando Paratrooper",
+            "accomplishments": [
+                "Led troops and carried out missions.",
+                "Received awards and trained with elite soldiers."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "institution": "University of Hertfordshire",
+            "years": "2011 - 2014",
+            "degree": "Bachelor in Computer Science"
+        },
+        {
+            "institution": "Massachusetts Institute of Technology",
+            "year": "2018",
+            "certificate": "Artificial Intelligence: Implications for Business"
+        },
+        {
+            "year": "2011",
+            "experience": "Computer Science Internship at a large-scale news company."
+        }
+    ],
+    "skills": {
+        "languages_and_technologies": [
+            {
+                "React": "4+ years"
+            },
+            {
+                "Typescript": "4+ years"
+            },
+            {
+                "Javascript": "10+ years"
+            },
+            {
+                "Redux": "2+ years"
+            },
+            {
+                "HTML/CSS": "10+ years"
+            },
+            {
+                "GraphQl": "2+ years"
+            },
+            {
+                "Python": "0.5 year"
+            }
+        ],
+        "roles": [
+            "Team Lead 4+ years"
+        ]
+    },
+    "hobbies": [
+        "Fitness",
+        "MMA",
+        "Mountaineering",
+        "Reading",
+        "Cocktails",
+        "Crypto",
+        "AI"
+    ],
+    "additional_info": {
+        "background": "Staz, short for Anastasis, is Greek and a US Citizen. Specializes in frontend engineering with React and Typescript. Enjoys learning about new technologies, reading, and has a diverse set of interests and skills."
+    }
+}

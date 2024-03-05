@@ -2,7 +2,7 @@ import json
 import os
 
 def create_new_assistant(client):
-  knowledge_file = client.files.create(file=open("knowledge.docx", "rb"),
+  knowledge_file = client.files.create(file=open("knowledge.json", "rb"),
                              purpose='assistants')
 
   with open('instructions.txt', 'r') as instructions_file:
