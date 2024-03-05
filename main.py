@@ -29,21 +29,6 @@ else:
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": CORS_ORIGIN}})
 
-# @app.after_request
-# def after_request(response):
-#     # Get the origin from the incoming request
-#     request_origin = request.headers.get('Origin')
-#     print(f"Request origin: {request_origin}")
-#     # Set the Access-Control-Allow-Origin header to match the request origin exactly
-#     if request_origin == 'https://staz.ai':
-#         response.headers.add('Access-Control-Allow-Origin', request_origin)
-#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-#     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-#     # Ensure credentials are supported if your application needs them
-#     response.headers.add('Access-Control-Allow-Credentials', 'true')
-#     return response
-
-
 # Init client
 client = OpenAI(
     api_key=OPENAI_API_KEY
@@ -82,8 +67,7 @@ def chat():
               "code": 400
           }
       }
-      return jsonify(error_response), 400
-
+      return handle_error_and_retry(error_response)
 
     print(f"Received message: {user_input} for thread ID: {thread_id}"
           )  # Debugging line
@@ -131,10 +115,14 @@ def chat():
     print(f"Assistant response: {response}")  # Debugging line
     return jsonify({"response": response})
   
+  except openai.BadRequestError as e:
+    error_message = str(e)
+    if 'does not exist' in error_message:
+        return handle_error_and_retry(e)
+
+  
   except openai.NotFoundError as e:
-    assistant_id, thread_id = create_assistant_and_thread_and_save_ids(client)
-    logging.error(f"OpenAI error: {e}, creating new assistant and resending chat request.")
-    return chat()
+    return handle_error_and_retry(e)
 
   
   except openai.OpenAIError as e:
@@ -155,6 +143,12 @@ def chat():
       logging.error(f"Unknown error: {e}")
       error = CustomAPIError(str(e), type(e).__name__, 500)
       return jsonify(error.to_dict()), error.status_code
+  
+def handle_error_and_retry(e):
+    global assistant_id, thread_id
+    assistant_id, thread_id = create_assistant_and_thread_and_save_ids(client)
+    logging.error(f"OpenAI error: {e}, creating new assistant and resending chat request.")
+    return chat()
   
 
 @app.route('/keepalive', methods=['GET'])

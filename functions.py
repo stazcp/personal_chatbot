@@ -9,10 +9,9 @@ def create_new_assistant(client):
     instructions = instructions_file.read()
   
   assistant = client.beta.assistants.create(instructions=instructions,
-                                            model="gpt-3.5-turbo",
+                                            model="gpt-4-turbo-preview",
                                             tools=[
                                               {"type": "code_interpreter"}, 
-                                              {"type": "retrieval"}  
                                             ],
                                             file_ids=[knowledge_file.id])
   print(f"Assistant created with ID: {assistant.id}")  # Debugging line
@@ -45,3 +44,4 @@ def load_ids():
             return ids.get('assistant_id'), ids.get('thread_id')
     else:
         return None, None
+        
