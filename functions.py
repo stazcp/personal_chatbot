@@ -2,7 +2,7 @@ import json
 import os
 
 def create_new_assistant(client):
-  knowledge_file = client.files.create(file=open("knowledge.json", "rb"),
+  knowledge_file = client.files.create(file=open("knowledge.docx", "rb"),
                              purpose='assistants')
 
   with open('instructions.txt', 'r') as instructions_file:
@@ -11,7 +11,8 @@ def create_new_assistant(client):
   assistant = client.beta.assistants.create(instructions=instructions,
                                             model="gpt-4-turbo-preview",
                                             tools=[
-                                              {"type": "code_interpreter"}, 
+                                              {"type": "code_interpreter"},
+                                              {"type": "retrieval"}
                                             ],
                                             file_ids=[knowledge_file.id])
   print(f"Assistant created with ID: {assistant.id}")  # Debugging line

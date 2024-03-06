@@ -1,4 +1,7 @@
 {
+  "document_type": "resume",
+  "description": "A resume for Staz Christodoulakis, a Senior Frontend Software Engineer with extensive experience in React and Typescript.",
+  "instructions": "This JSON document contains a resume for Staz Christodoulakis. It includes his work experience, education, skills, and additional information. Feel free to use this document to learn more about Staz's professional background. Under challenges you will find a few examples of projects and initiatives that Staz has worked on. These examples are meant to provide a deeper understanding of his problem-solving skills and technical expertise. If you have any questions or would like to discuss Staz's qualifications further, please don't hesitate to reach out.",
   "personal_info": {
     "name": "STAZ CHRISTODOULAKIS",
     "title": "SENIOR FRONTEND SOFTWARE ENGINEER",
@@ -14,9 +17,10 @@
         "Lead teams of engineers.",
         "Mentored Junior and Mid Level Engineers.",
         "Improved UX/UI across the App.",
-        "Developed hiring process."
+        "Developed hiring process.",
+        "Was selected as product engineering AI ambassador."
       ],
-      "challenges": [
+      "challenges_and_projects": [
         {
           "ProblemIdentification": "In our app, we faced challenges with an outdated drawer system. The existing implementation was monolithic and difficult to maintain, suffering from complex state management and poor component integration.",
           "InitiativeAndDiscovery": "During a design sprint for a proof of concept on a separate long-term project, I recognized the need to overhaul our drawer system. This realization prompted me to initiate a refactor of the drawer's state management and architecture.",
@@ -57,7 +61,7 @@
         "Created Data Layer connected to Google Analytics and Tag Manager.",
         "Hired and Mentored engineers."
       ],
-      "challenges": [
+      "challenges_and_projects": [
         {
           "Project Description": "Developed a Chrome extension to stream live video from the user's webcam to an AWS server. Utilized AWS Lambda for processing images in S3 buckets, extracting breathing and heart rates, and returning these metrics to the frontend.",
           "Objective": "The extension aimed to recommend meditation or breathing techniques to users showing signs of stress from prolonged computer use, thereby enhancing productivity and reducing stress for remote workers.",
@@ -91,7 +95,7 @@
         "Developed websites and provided consulting.",
         "Tutoring on web development."
       ],
-      "challenges": [
+      "challenges_and_projects": [
         {
           "title": "Consulting for a Government Organization",
           "description": "Provided consulting for a Government Organization in building a web app with React/Typescript. I was not legally allowed to touch the code, so I taught the staff how to work with React and Typescript via video calls and helped them build and deploy a feature."
