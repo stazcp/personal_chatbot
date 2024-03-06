@@ -1,104 +1,160 @@
 {
-    "personal_info": {
-        "name": "STAZ CHRISTODOULAKIS",
-        "title": "SENIOR FRONTEND SOFTWARE ENGINEER",
-        "openness_to_relocation_and_remote_work": "Staz has been working remotely most of his career in California and he enjoys remote work. He is also willing to work in an office for the right position and may be willing to relocate under the right circumstances, with relocation assistance being helpful."
-    },
-    "work_experience": [
+  "personal_info": {
+    "name": "STAZ CHRISTODOULAKIS",
+    "title": "SENIOR FRONTEND SOFTWARE ENGINEER",
+    "openness_to_relocation_and_remote_work": "Staz has been working remotely most of his career in California and he enjoys remote work. He is also willing to work in an office for the right position and may be willing to relocate under the right circumstances, with relocation assistance being helpful."
+  },
+  "work_experience": [
+    {
+      "date": "JAN 2022 to Present",
+      "company": "dv01",
+      "title": "Senior Frontend Engineer",
+      "accomplishments": [
+        "Collaborated with Project Managers and other teams to design and develop major projects.",
+        "Lead teams of engineers.",
+        "Mentored Junior and Mid Level Engineers.",
+        "Improved UX/UI across the App.",
+        "Developed hiring process."
+      ],
+      "challenges": [
         {
-            "date": "JAN 2022 to Present",
-            "company": "dv01",
-            "title": "Senior Frontend Engineer",
-            "accomplishments": [
-                "Collaborated with Project Managers and other teams to design and develop major projects.",
-                "Lead teams of engineers.",
-                "Mentored Junior and Mid Level Engineers.",
-                "Improved UX/UI across the App.",
-                "Developed hiring process."
-            ]
+          "ProblemIdentification": "In our app, we faced challenges with an outdated drawer system. The existing implementation was monolithic and difficult to maintain, suffering from complex state management and poor component integration.",
+          "InitiativeAndDiscovery": "During a design sprint for a proof of concept on a separate long-term project, I recognized the need to overhaul our drawer system. This realization prompted me to initiate a refactor of the drawer's state management and architecture.",
+          "SolutionDevelopment": "I developed a new drawer component utilizing Framer Motion for enhanced animations and reactivity. This included intelligent features like auto-adjusting for expanding sidebars, significantly improving user experience.",
+          "InnovativeStateManagement": "To address the complexities of state management, I introduced a custom hook leveraging the messenger pattern. This allowed for seamless control over multiple drawers, ensuring only one could be open at a time, without the need for registering each drawer in a central state or dealing with intricate state logic.",
+          "EaseOfIntegration": "The new drawer component was designed to be highly reusable and easy to integrate. By incorporating it into our Component Library and utilizing the `useDrawer` hook, developers could effortlessly implement the drawer with minimal setup.",
+          "OutcomeAndImpact": "The result was a significant improvement in the app's architecture and user interface. The new drawer system is not only more maintainable and scalable but also provides a better experience for both developers and users alike."
         },
         {
-            "date": "2021 to 2022",
-            "company": "breathing.ai",
-            "title": "Frontend Engineer",
-            "accomplishments": [
-                "Worked directly with CEO on technical decisions.",
-                "Developed a Chrome Extension for Screen Experience.",
-                "Created Data Layer connected to Google Analytics and Tag Manager.",
-                "Hired and Mentored engineers."
-            ]
+          "Problem Identification": "During the PEOD (Product Engineer On Duty) rotation, which lasts for a week, I encounter novel and urgent bugs along with time-sensitive customer requests. Despite having excellent team support, the nature of these tasks requires quick and effective resolution.",
+          "Challenge": "The primary challenge is to address multiple complex bugs efficiently within a constrained time frame. Solutions must be rapid, effective, and must not introduce new issues.",
+          "Action and Approach": "Throughout these rotations, I employ a systematic approach to problem-solving. This includes prioritizing issues based on their impact and urgency, conducting thorough investigations to understand the root cause, and crafting solutions that are both fast and reliable.",
+          "Solution Development": "My focus is on delivering fixes that are not only quick to implement but also sustainable and with minimal risk of causing additional problems. This often involves leveraging deep system knowledge, collaboration with team members for insights, and sometimes innovative use of technology to address the bugs.",
+          "Outcome and Impact": "The outcome of this approach is the ability to solve extremely challenging problems efficiently, often within 24 hours, ensuring that user-facing issues are resolved in a timely manner. This not only enhances user satisfaction but also contributes to maintaining high service reliability and trust in our product.",
+          "Skills and Learning": "These rotations are intensely learning-focused, enhancing my problem-solving skills, ability to work under pressure, and deepening my technical knowledge. Moreover, they reinforce the importance of teamwork and effective communication in achieving fast-paced, high-quality solutions."
         },
         {
-            "date": "2018 to 2022",
-            "title": "Freelancing as Web Developer, Frontend Developer",
-            "accomplishments": [
-                "Developed websites and provided consulting.",
-                "Tutoring on web development."
-            ]
+          "Problem Identification": "Our application faced challenges with a monolithic and tangled state management system, significantly hindering our ability to introduce an issuer dashboard. The rigid coupling of components with contexts led to reduced flexibility and increased complexity.",
+          "Initiative and Discovery": "Recognizing the critical need for a more modular and agile framework, I spearheaded an initiative to overhaul our state management approach. This was essential for enhancing feature implementation speed and component reusability.",
+          "Solution Development": "I led the transition towards a dual-state management strategy, incorporating use case specific hooks for localized state scenarios, alongside a global state managed by Redux. This approach aimed at decoupling component states from overarching contexts, promoting modular and scalable architecture.",
+          "Outcome and Impact": "The restructured state management system dramatically improved our application's flexibility and maintainability. It enabled the successful creation of an issuer dashboard and set a new standard for developing features, boosting our development team's agility and efficiency.",
+          "Leadership and Team Dynamics": "Guiding the company through this transition, I emphasized collaborative problem-solving and knowledge sharing. This leadership approach not only facilitated a smooth adoption of the new state management practices but also fostered a culture of innovation and continuous improvement within the team."
         },
         {
-            "date": "2014 to 2015",
-            "title": "Greek Special Forces Commando Paratrooper",
-            "accomplishments": [
-                "Led troops and carried out missions.",
-                "Received awards and trained with elite soldiers."
-            ]
+          "scenario": "While applying for my current job and on vacation, I was asked to develop a React App that would aggregate data from a CSV and display it to the user with some charts and filters as an interview challenge.",
+          "action": "Developed the React App under constrained conditions, including time limit and being on the road.",
+          "outcome": "Successfully completed the task within the 3-hour deadline and passed the interview challenge, demonstrating my ability to deliver under pressure."
         }
-    ],
-    "education": [
-        {
-            "institution": "University of Hertfordshire",
-            "years": "2011 - 2014",
-            "degree": "Bachelor in Computer Science"
-        },
-        {
-            "institution": "Massachusetts Institute of Technology",
-            "year": "2018",
-            "certificate": "Artificial Intelligence: Implications for Business"
-        },
-        {
-            "year": "2011",
-            "experience": "Computer Science Internship at a large-scale news company."
-        }
-    ],
-    "skills": {
-        "languages_and_technologies": [
-            {
-                "React": "4+ years"
-            },
-            {
-                "Typescript": "4+ years"
-            },
-            {
-                "Javascript": "10+ years"
-            },
-            {
-                "Redux": "2+ years"
-            },
-            {
-                "HTML/CSS": "10+ years"
-            },
-            {
-                "GraphQl": "2+ years"
-            },
-            {
-                "Python": "0.5 year"
-            }
-        ],
-        "roles": [
-            "Team Lead 4+ years"
-        ]
+      ]
     },
-    "hobbies": [
-        "Fitness",
-        "MMA",
-        "Mountaineering",
-        "Reading",
-        "Cocktails",
-        "Crypto",
-        "AI"
-    ],
-    "additional_info": {
-        "background": "Staz, short for Anastasis, is Greek and a US Citizen. Specializes in frontend engineering with React and Typescript. Enjoys learning about new technologies, reading, and has a diverse set of interests and skills."
+    {
+      "date": "2021 to 2022",
+      "company": "breathing.ai",
+      "title": "Frontend Engineer",
+      "accomplishments": [
+        "Worked directly with CEO on technical decisions.",
+        "Developed a Chrome Extension for Screen Experience.",
+        "Created Data Layer connected to Google Analytics and Tag Manager.",
+        "Hired and Mentored engineers."
+      ],
+      "challenges": [
+        {
+          "Project Description": "Developed a Chrome extension to stream live video from the user's webcam to an AWS server. Utilized AWS Lambda for processing images in S3 buckets, extracting breathing and heart rates, and returning these metrics to the frontend.",
+          "Objective": "The extension aimed to recommend meditation or breathing techniques to users showing signs of stress from prolonged computer use, thereby enhancing productivity and reducing stress for remote workers.",
+          "Challenge": "The main challenge was to optimize the frame rate (FPS) for accurate health metrics reading without incurring excessive costs or causing browser slowdowns.",
+          "Solution": "Hired and collaborated with international contractors to build the processing pipeline, while I focused on integrating the frontend components to operationalize this feature.",
+          "Outcome": "Successfully implemented a feature that monitors users' health metrics in real-time, providing valuable wellness interventions to improve user well-being during computer use."
+        },
+        {
+          "Project Description": "Built a new login/signup screen for our app overnight to prepare for a presentation at the Web Summit in Portugal.",
+          "Objective": "To refresh the app's entry point with an updated login/signup interface in time for a crucial tech showcase, enhancing user first impressions and app usability.",
+          "Challenge": "The tight deadline required completing, deploying, and testing the new feature by 7 am, with the presentation scheduled for 7:30 am, leaving little margin for error.",
+          "Solution": "Dedicated overnight work up to 7 am, ensuring the new interface was ready and fully functional 30 minutes before the presentation.",
+          "Outcome": "The login/signup screen was successfully deployed and functioned flawlessly during the presentation, contributing to a positive showcase of our app."
+        },
+        {
+          "Project Description": "Assigned tasks to junior hires, providing leadership and guidance to produce high-quality code, and built a Data Layer using Google Tag Manager for user interaction insights.",
+          "Objective": "To enhance the development team's effectiveness by leading juniors in best practices and implementing a Data Layer for improved analytics on user behavior.",
+          "Challenge": "As a non-senior engineer, the dual challenge was providing effective leadership to junior engineers and mastering Google Tag Manager to implement a sophisticated Data Layer.",
+          "Solution": {
+            "Leadership": "Guided junior developers through task assignments and code quality expectations, focusing on education and code quality to minimize future refactoring.",
+            "Technical Implementation": "Completed a course on Google Tag Manager, led the team in adopting and utilizing the Data Layer for detailed analytics on app interaction."
+          },
+          "Outcome": "Successfully improved team coding standards and analytics capabilities, leading to enhanced insights into user behavior and app interaction patterns."
+        }
+      ]
+    },
+    {
+      "date": "2018 to 2022",
+      "title": "Freelancing as Web Developer, Frontend Developer",
+      "accomplishments": [
+        "Developed websites and provided consulting.",
+        "Tutoring on web development."
+      ],
+      "challenges": [
+        {
+          "title": "Consulting for a Government Organization",
+          "description": "Provided consulting for a Government Organization in building a web app with React/Typescript. I was not legally allowed to touch the code, so I taught the staff how to work with React and Typescript via video calls and helped them build and deploy a feature."
+        },
+        {
+          "title": "Building Web Applications as a Freelancer",
+          "description": "Created and built multiple web applications using WordPress and custom components for various clients. The biggest challenge was getting clients and building quickly what they needed. I partnered with a designer and WordPress specialist, while I focused on coding, creating custom components, and creating projects that would stand out."
+        }
+      ]
+    },
+    {
+      "date": "2014 to 2015",
+      "title": "Greek Special Forces Commando Paratrooper",
+      "accomplishments": [
+        "Led troops and carried out missions.",
+        "Received awards and trained with elite soldiers."
+      ]
     }
+  ],
+  "education": [
+    {
+      "institution": "University of Hertfordshire",
+      "years": "2011 - 2014",
+      "degree": "Bachelor in Computer Science"
+    },
+    {
+      "institution": "Massachusetts Institute of Technology",
+      "year": "2018",
+      "certificate": "Artificial Intelligence: Implications for Business"
+    },
+    {
+      "year": "2011",
+      "experience": "Computer Science Internship at a large-scale news company."
+    }
+  ],
+  "skills": {
+    "languages_and_technologies": [
+      {
+        "React": "4+ years"
+      },
+      {
+        "Typescript": "4+ years"
+      },
+      {
+        "Javascript": "10+ years"
+      },
+      {
+        "Redux": "2+ years"
+      },
+      {
+        "HTML/CSS": "10+ years"
+      },
+      {
+        "GraphQl": "2+ years"
+      },
+      {
+        "Python": "0.5 year"
+      }
+    ],
+    "roles": ["Team Lead 4+ years"]
+  },
+  "hobbies": ["Fitness", "MMA", "Mountaineering", "Reading", "Cocktails", "Crypto", "AI"],
+  "additional_info": {
+    "background": "Staz, short for Anastasis, is Greek and a US Citizen. Specializes in frontend engineering with React and Typescript. Enjoys learning about new technologies, reading, and has a diverse set of interests and skills."
+  }
 }
