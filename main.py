@@ -9,7 +9,7 @@ import openai
 from openai import OpenAI
 from flask_cors import CORS
 from error import CustomAPIError 
-from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids
+from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids, keep_alive
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -172,3 +172,6 @@ if __name__ == '__main__':
   port = int(os.environ.get('PORT', 8080))
   app.run(host='0.0.0.0', port=port)
 
+# Start the background thread
+keep_alive_thread = Thread(target=keep_alive)
+keep_alive_thread.start()
