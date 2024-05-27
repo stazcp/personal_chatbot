@@ -2,6 +2,7 @@ import logging
 import json
 import os
 from time import sleep
+import time
 from packaging import version
 from flask import Flask, request, jsonify
 from threading import Thread
@@ -9,8 +10,10 @@ import openai
 from openai import OpenAI
 from flask_cors import CORS
 from error import CustomAPIError 
-from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids, keep_alive
+from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids
 from dotenv import load_dotenv
+import requests
+
 
 load_dotenv()
 
@@ -151,10 +154,16 @@ def handle_error_and_retry(e):
     return chat()
   
 
-@app.route('/keepalive', methods=['GET'])
-def keep_alive():
-    return "Server is awake", 200
-
+@app.route('/self_ping', methods=['GET'])
+def self_ping():
+    try:
+        response = requests.get(os.environ.get('CHATBOT_SERVER_ADDRESS'))
+        if response.status_code == 200:
+            print("Self-ping successful")
+        else:
+            print("Self-ping failed with status: ", response.status_code)
+    except requests.RequestException as e:
+        print("Self-ping failed: ", e)
 
 @app.errorhandler(500)
 def internal_server_error(e):
@@ -166,12 +175,17 @@ def internal_server_error(e):
     }
     return jsonify(response), 500
 
+def keep_alive():
+    while True:
+        self_ping()
+        time.sleep(49)  # wait for 60 seconds before next ping
+
 # Run server
 if __name__ == '__main__':
+  # Start the background thread
+  keep_alive_thread = Thread(target=keep_alive)
+  keep_alive_thread.start()
   # Get the PORT from environment variable with a default fallback
   port = int(os.environ.get('PORT', 8080))
   app.run(host='0.0.0.0', port=port)
 
-# Start the background thread
-keep_alive_thread = Thread(target=keep_alive)
-keep_alive_thread.start()

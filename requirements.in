@@ -63,3 +63,4 @@ SecretStorage
 gunicorn
 flask_cors
 python_dotenv
+requests

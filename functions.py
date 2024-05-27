@@ -46,8 +46,3 @@ def load_ids():
     else:
         return None, None
         
-
-def keep_alive():
-    while True:
-        print("Keeping the application alive...")
-        sleep(45) 
