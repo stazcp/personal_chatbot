@@ -7,6 +7,8 @@ Staz AI is a conversational AI designed to answer questions about Staz based on 
 1. Clone the repository: `git clone <repository-url>`
 2. Navigate to the project directory: `cd <project-directory>`
 3. Install the required dependencies: `pip install -r requirements.txt`
+   venv is recommended (create a venv with `python -m venv venv` and activate it with `source venv/bin/activate`)
+   with venv run `python -m gunicorn main:app`
 4. Run the application: `python app.py`
 
 ## Usage

@@ -10,7 +10,7 @@ import openai
 from openai import OpenAI
 from flask_cors import CORS
 from error import CustomAPIError 
-from functions import create_assistant_and_thread_and_save_ids, create_new_thread, load_ids
+from functions import setup_assistant_and_thread, create_new_thread, load_ids
 from dotenv import load_dotenv
 import requests
 
@@ -42,7 +42,7 @@ assistant_id, thread_id = load_ids()
 
 # If no existing IDs, create new assistant and thread
 if assistant_id is None or thread_id is None:
-    assistant_id, thread_id = create_assistant_and_thread_and_save_ids(client)
+    assistant_id, thread_id = setup_assistant_and_thread(client)
 
 # Start conversation thread
 @app.route('/start', methods=['GET'])
@@ -149,7 +149,7 @@ def chat():
   
 def handle_error_and_retry(e):
     global assistant_id, thread_id
-    assistant_id, thread_id = create_assistant_and_thread_and_save_ids(client)
+    assistant_id, thread_id = setup_assistant_and_thread(client)
     logging.error(f"OpenAI error: {e}, creating new assistant and resending chat request.")
     return chat()
   
