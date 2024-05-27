@@ -8,8 +8,10 @@ Staz AI is a conversational AI designed to answer questions about Staz based on 
 2. Navigate to the project directory: `cd <project-directory>`
 3. Install the required dependencies: `pip install -r requirements.txt`
    venv is recommended (create a venv with `python -m venv venv` and activate it with `source venv/bin/activate`)
+
+4. Provide required env variables `OPENAI_API_KEY`, `CORS_ORIGIN`, (not required - recommended) `ASSISTANT_NAME` 
    
-4. Run the application:
+5. Run the application:
     - with venv `python -m gunicorn main:app`
     - without `gunicorn main:app`
     - without gunicorn `python main.py`
